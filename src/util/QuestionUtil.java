@@ -4,8 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Random;
+import java.sql.Statement;
+import java.util.*;
+
 
 import entity.Question;
 
@@ -28,6 +29,7 @@ public class QuestionUtil {
 					question.setType(type);
 					question.setCourse(course);
 					question.setQues(rs.getString(4));
+					question.setKeyA(rs.getString(5));
 					question.setKeyB(rs.getString(6));
 					question.setKeyC(rs.getString(7));
 					question.setKeyD(rs.getString(8));
@@ -49,5 +51,26 @@ public class QuestionUtil {
 			allQuestions.remove(index);
 		}
 		return randQuestions;
+	}
+	
+	public List<Question> getAnswers() {
+		List<Question> answers = new ArrayList<>();
+		String sql = " select ques_id, ques_type, answer from question where "
+				+ "ques_type in (1,2,3) order by ques_type, ques_type ";
+		try (Connection conn = DBUtil.getConnection();
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(sql)) {
+			while (rs.next()) {
+				Question question = new Question();
+				question.setId(rs.getInt("ques_id"));
+				question.setType(rs.getInt("ques_type"));
+				question.setAnswer(rs.getString("answer"));
+				
+				answers.add(question);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return answers;
 	}
 }

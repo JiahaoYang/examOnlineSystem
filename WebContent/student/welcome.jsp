@@ -24,7 +24,6 @@
 <body>
 	<h1>在线考试系统</h1>
 	<%
-		System.out.println(path);
 		String userId = (String)session.getAttribute("userId");
 		String course = (String)session.getAttribute("course");
 		String testTime = (String)session.getAttribute("testTime");

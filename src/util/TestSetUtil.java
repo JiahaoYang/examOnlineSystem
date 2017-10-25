@@ -26,7 +26,6 @@ public class TestSetUtil {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(courses);
 		return courses;
 	}
 	

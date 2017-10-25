@@ -75,7 +75,7 @@
 		<span><strong>考试剩余时间:</strong></span>
 		<span id="timeSpan"></span>
 	</div>
-	<form action="<%=path%>/TestSubmitServlet" method="post">
+	<form action="<%=path%>/CorrectPaperServlet" method="post">
 	<div class="main">
 	<%
 		int typeCnt = 1;
@@ -94,6 +94,7 @@
 		</div>
 		<input type="radio" name="judge<%=i%>Value" value="yes">正确<br />
 		<input type="radio" name="judge<%=i%>Value" value="no">错误<br />
+		<input type="hidden" name="judgeId<%=i%>" value="<%=question.getId()%>" />
 		</div>
 	<%
 		}
@@ -128,6 +129,7 @@
 		<%=question.getKeyC()==null?"":question.getKeyC().trim()%><br/>
 		<input type="radio" name="single<%=i%>Value" value="D">D.
 		<%=question.getKeyD()==null?"":question.getKeyD().trim()%><br/>
+		<input type="hidden" name="singleId<%=i%>" value="<%=question.getId()%>" />
 	<%
 		}
 		typeCnt++;
@@ -145,7 +147,7 @@
 		<strong><%=CommUtil.getTypeCnt(typeCnt)%>.多选题</strong>
 		(共<%=testSet.getMulCnt()%>题，每题<%=testSet.getMulScore()%>分)
 	<% 
-		questions = qsUtil.getQuestionsByType(course, testSet.getSingleCnt(), 3);
+		questions = qsUtil.getQuestionsByType(course, testSet.getMulCnt(), 3);
 		for (int i = 0; i < questions.size(); ++i) {
 			question = questions.get(i);
 	%>
@@ -160,6 +162,7 @@
 		<%=question.getKeyC()==null?"":question.getKeyC().trim()%><br/>
 		<input type="checkbox" name="muti<%=i%>Value" value="D">D.
 		<%=question.getKeyD()==null?"":question.getKeyD().trim()%><br/>
+		<input type="hidden" name="mutiId<%=i%>" value="<%=question.getId()%>" />
 	<%
 		}
 		typeCnt++;
@@ -168,7 +171,7 @@
 	<%
 		}
 	%>
-	
+	<input type="button" value="交卷" onclick="submit()">
 	</form>
 </body>
 </html>

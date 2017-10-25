@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 import util.TestSetUtil;
+import util.UserFlagUtil;
 import util.UserUtil;
 
 /**
@@ -54,6 +55,7 @@ public class LoginServlet extends HttpServlet {
 		String course = new String(request.getParameter("course").getBytes("iso8859-1"), "utf-8").trim();
 		
 		UserUtil userUtil = new UserUtil();
+		UserFlagUtil ufUtil = new UserFlagUtil();
 		TestSetUtil tsUtil = new TestSetUtil();
 		
 		boolean userSuccess = userUtil.checkUser(userId, 3);
@@ -61,7 +63,7 @@ public class LoginServlet extends HttpServlet {
 		
 		//用户名，类型，密码验证成功
 		if (success) {
-			int flag = userUtil.isSubmit(userId, course, testTime);
+			int flag = ufUtil.isSubmit(userId, course, testTime);
 			//今日有相关考试信息
 			if (tsUtil.getTestSet(course, testTime) != null) {
 				//未考试
