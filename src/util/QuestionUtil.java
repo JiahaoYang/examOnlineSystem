@@ -154,4 +154,19 @@ public class QuestionUtil {
 		}
 		return flag;
 	}
+	
+	public boolean deleteQuestion(int quesId) {
+		boolean flag = false;
+		String sql = " delete from question where ques_id=? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setInt(1, quesId);
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }

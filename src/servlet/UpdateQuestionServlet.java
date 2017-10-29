@@ -75,13 +75,13 @@ public class UpdateQuestionServlet extends HttpServlet {
 		}
 		else {
 			keyA = new String(
-					request.getParameter("KeyA").getBytes("ios8859-1"), "utf-8").trim();
+					request.getParameter("KeyA").getBytes("iso8859-1"), "utf-8").trim();
 			keyB = new String(
-					request.getParameter("KeyB").getBytes("ios8859-1"), "utf-8").trim();
+					request.getParameter("KeyB").getBytes("iso8859-1"), "utf-8").trim();
 			keyC= new String(
-					request.getParameter("KeyC").getBytes("ios8859-1"), "utf-8").trim();
+					request.getParameter("KeyC").getBytes("iso8859-1"), "utf-8").trim();
 			keyD = new String(
-					request.getParameter("KeyD").getBytes("ios8859-1"), "utf-8").trim();
+					request.getParameter("KeyD").getBytes("iso8859-1"), "utf-8").trim();
 			String[] strAns = request.getParameterValues("mulAns");
 			for (String ans : strAns) 
 				answer += (ans + " ");

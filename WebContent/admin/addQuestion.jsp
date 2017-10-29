@@ -5,68 +5,19 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						request.getServerPort() + path + "/";
-	String quesId = request.getParameter("quesId").trim();
-	int id = -1;
-	if (quesId != null)
-		id = Integer.parseInt(quesId);
-	TestSetUtil tsUtil = new TestSetUtil();
-	ArrayList<String> courses = tsUtil.getCourses();
-	QuestionUtil qsUtil = new QuestionUtil();
-	Question question = qsUtil.getQuestionById(id);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>试题修改</title>
+<title>试题添加</title>
 <script src="<%=path%>/js/questionSet.js"></script>
 <script>
 	function init() {
-		setCourse();
-		setType();
-		setAnswer();
 		setAnswerType();
 		judgeCourse();
 	}
-	function setCourse() {
-		var subject = document.getElementsByName("selectCourse")[0];
-		var course = "<%=question.getCourse()%>";
-		for (var i = 0; i < subject.options.length; ++i) 
-			if (subject.options[i].value == course)
-				subject.options[i].selected = true;
-	}
-	function setType() {
-		var tagType = document.getElementsByName("selectType")[0];
-		var type = "<%=question.getType()%>";
-		for (var i = 0; i < tagType.options.length; ++i) 
-			if (tagType.options[i].value == type)
-				tagType.options[i].selected = true;
-	}
-	function setAnswer() {
-		var answer = "<%=question.getAnswer().trim()%>";
-		var type = document.getElementsByName("selectType")[0];
-		var judgeAns = document.getElementsByName("judgeAns");
-		var sinAns = document.getElementsByName("sinAns");
-		var mulAns = document.getElementsByName("mulAns");
-		
-		if (type.selectedIndex == 1) {
-			for (var i = 0; i < judgeAns.length; ++i)
-				if (judgeAns[i].value == answer)
-					judgeAns[i].checked = true;
-		}
-		else if (type.selectedIndex == 2) {
-			for (var i = 0; i < sinAns.length; ++i)
-				if (sinAns[i].value == answer)
-					sinAns[i].checked = true;
-		}
-		else if (type.selectedIndex == 3) {
-			var strAns = answer.split(" ");
-			for (var i = 0; i < mulAns.length; ++i)
-				for (var j = 0; j < strAns.length; ++j)
-					if (mulAns[i].value == strAns[j])
-						mulAns[i].checked = true;
-		}
-	}
+
 </script>
 </head>
 <body onload="init()">

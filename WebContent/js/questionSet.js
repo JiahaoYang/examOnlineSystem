@@ -85,7 +85,7 @@ function isSubmit() {
 				answer += ansChoice[i].value;	
 	}
 	else if (type.selectedIndex == 3) {
-		var ansChoice = document.getElementsByName("judgeAns");
+		var ansChoice = document.getElementsByName("mulAns");
 		for (var i = 0; i < ansChoice.length; ++i)
 			if (ansChoice[i].checked == true)
 				answer += ansChoice[i].value;
