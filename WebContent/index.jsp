@@ -16,9 +16,19 @@
 	<table>
 	<tr>
 		<td>
-		<a href="<%=path%>/student/login.jsp">在线考试</a>
+		<a href="<%=path%>/student/login.jsp">学生登录</a>
 		</td>
-	</tr>		
+	</tr>
+	<tr>
+		<td>
+		<a href="<%=path%>/teacher/login.jsp">教师登录</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+		<a href="<%=path%>/admin/login.jsp">管理员登录</a>
+		</td>
+	</tr>
 	</table>
 </div>
 </body>

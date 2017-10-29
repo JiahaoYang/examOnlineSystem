@@ -51,6 +51,9 @@ insert `user` values(
 insert `user` values(
 	'admin', 'admin', 'admin', 1
 );
+insert `user` values(
+	't1' , '钱诗慧', 't1', 2
+);
 
 insert `user_flag` values(
 	'15090128', '数学', '0', '2017/10/24'
