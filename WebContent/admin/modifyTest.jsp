@@ -5,38 +5,33 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						request.getServerPort() + path + "/";
+	String c = request.getParameter("course").trim();
+	String testTime = request.getParameter("testTime").trim();
+
 	TestSetUtil tsUtil = new TestSetUtil();
 	ArrayList<String> courses = tsUtil.getCourses();
+	TestSet test = tsUtil.getTestSet(c, testTime);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>试题添加</title>
+<title>考试修改</title>
 <script src="<%=path%>/js/questionSet.js"></script>
 <script>
-	function init() {
-		var judgeAns = document.getElementById("judgeAns");
-		var sinAns = document.getElementById("sinAns");
-		var mulAns = document.getElementById("mulAns");
-		var choiceA = document.getElementById("choiceA");
-		var choiceB = document.getElementById("choiceB");
-		var choiceC = document.getElementById("choiceC");
-		var choiceD = document.getElementById("choiceD");
-		
-		choiceA.style.display = "none";
-		choiceB.style.display = "none";
-		choiceC.style.display = "none";
-		choiceD.style.display = "none";
-		judgeAns.style.display = "none";
-		sinAns.style.display = "none";
-		mulAns.style.display = "none";	
+	function setCourse() {
+		var subject = document.getElementsByName("selectCourse")[0];
+		var course = "<%=test.getCourse()%>";
+		for (var i = 0; i < subject.options.length; ++i) 
+			if (subject.options[i].value == course)
+				subject.options[i].selected = true;
 	}
+
 </script>
 </head>
-<body onload="init()">
-<h1>添加试题</h1>
-<form action="<%=path%>/AddQuestionServlet" method="post">
+<body onload="setCourse()">
+<h1>考试信息修改</h1>
+<form action="<%=path%>/UpdateTestServlet" method="post">
 <table align="center">
 	<tr>
 		<td>科目:</td>
@@ -68,31 +63,31 @@
 	<tr>
 		<td>题目:</td>
 		<td>
-		 <textarea name="ques"></textarea>
+		 <textarea name="ques"><%=question.getQues().trim()%></textarea>
 		</td>
 	</tr>
 	<tr id="choiceA">
 		<td>A:</td>
 		<td>
-		 <textarea name="KeyA"></textarea>
+		 <textarea name="KeyA"><%=question.getKeyA()==null ? "" : question.getKeyA().trim()%></textarea>
 		</td>
 	</tr>
 	<tr id="choiceB">
 		<td>B:</td>
 		<td>
-		 <textarea name="KeyB"></textarea>
+		 <textarea name="KeyB"><%=question.getKeyB()==null ? "" : question.getKeyB().trim()%></textarea>
 		</td>
 	</tr>
 	<tr id="choiceC">
 		<td>C:</td>
 		<td>
-		 <textarea name="KeyC"></textarea>
+		 <textarea name="KeyC"><%=question.getKeyC()==null ? "" : question.getKeyC().trim()%></textarea>
 		</td>
 	</tr>
 	<tr id="choiceD">
 		<td>D:</td>
 		<td>
-		 <textarea name="KeyD"></textarea>
+		 <textarea name="KeyD"><%=question.getKeyD()==null ? "" : question.getKeyD().trim()%></textarea>
 		</td>
 	</tr>
 	<tr>
@@ -118,7 +113,8 @@
 	</tr>
 	<tr>
 		<td>
-		 <input type="button" value="提交" onclick="isSubmit()" />
+		 <input type="button" value="修改" onclick="isSubmit()" />
+		 <input type="hidden" value="<%=question.getId()%>" name="hiddenQuesId" />
 		</td>
 	</tr>
 </table>

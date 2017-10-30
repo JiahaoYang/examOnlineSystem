@@ -120,6 +120,15 @@ insert `question` values(
 
 update user_flag set flag=0 where course='语文' and user_id='15090128';
 select * from test_record;
+alter table question modify ques_id int auto_increment;
+alter table question modify answer varchar(10);
+select * from question;
+insert `question`(ques_type, ques_course, ques_content, opt_a, opt_b, opt_c, opt_d, answer) values(
+	 3, '语文', '修辞手法有哪些', '比喻', '飞流直下三千尺', '拟人', '排比', 'A C D'
+);
+
+delete from question where ques_course='语文';
+delete from question where ques_course='数学';
 
 DROP TABLE IF EXISTS `test_record`;
 CREATE TABLE `test_record` (

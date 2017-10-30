@@ -169,4 +169,29 @@ public class QuestionUtil {
 		}
 		return flag;
 	}
+	
+	public boolean insertQuestion(Question question) {
+		String sql = " insert question("
+				+ "ques_type, ques_course, ques_content, opt_a, opt_b, opt_c, opt_d, answer)"
+				+ " values(?,?,?,?,?,?,?,?)";
+		boolean flag = false;
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setInt(1, question.getType());
+			st.setString(2, question.getCourse());
+			st.setString(3, question.getQues());
+			st.setString(4, question.getKeyA());
+			st.setString(5, question.getKeyB());
+			st.setString(6, question.getKeyC());
+			st.setString(7, question.getKeyD());
+			st.setString(8, question.getAnswer());
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }

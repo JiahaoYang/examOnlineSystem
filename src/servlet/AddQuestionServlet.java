@@ -11,16 +11,16 @@ import entity.Question;
 import util.QuestionUtil;
 
 /**
- * Servlet implementation class UpdateQuestionServlet
+ * Servlet implementation class AddQuestionServlet
  */
-@WebServlet(name = "UpdateQuestionServlet", urlPatterns = {"/UpdateQuestionServlet"})
-public class UpdateQuestionServlet extends HttpServlet {
+@WebServlet(name = "AddQuestionServlet", urlPatterns = {"/AddQuestionServlet"})
+public class AddQuestionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdateQuestionServlet() {
+    public AddQuestionServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,6 @@ public class UpdateQuestionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		int quesId = Integer.parseInt(request.getParameter("hiddenQuesId").trim());
 		String courseType = request.getParameter("course");
 		String strCourse = "";
 		if ("1".equals(courseType))
@@ -87,7 +86,7 @@ public class UpdateQuestionServlet extends HttpServlet {
 				answer += (ans + " ");
 			answer = answer.substring(0, answer.length()-1);
 		}
-		question.setId(quesId);
+		
 		question.setCourse(course);
 		question.setType(type);
 		question.setQues(ques);
@@ -98,7 +97,7 @@ public class UpdateQuestionServlet extends HttpServlet {
 		question.setAnswer(answer);
 		
 		QuestionUtil qsUtil = new QuestionUtil();
-		boolean success = qsUtil.updateQuestion(question);
+		boolean success = qsUtil.insertQuestion(question);
 		if (success)
 			response.sendRedirect(request.getContextPath() + "/admin/updateQuesSuccess.html");
 		else

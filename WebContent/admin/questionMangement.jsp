@@ -55,7 +55,7 @@
 		}
 	%>
 		<tr>
-			<td><a href="<%=path%>/addQuestion.jsp">添加试题</a></td>
+			<td><a href="<%=path%>/admin/addQuestion.jsp">添加试题</a></td>
 		</tr>
 	</table>
 </body>
