@@ -86,6 +86,8 @@ public class TestSet {
 	@Override
 	public String toString() {
 		return "Test[course=" + course + ", time=" + testTime + "]" + 
-				"judegCnt:" + judgeCnt + ", SinCnt:" + singleCnt + ", mulCnt:" + mulCnt;
+				"judegCnt:" + judgeCnt + ", SinCnt:" + singleCnt + ", mulCnt:" + mulCnt + 
+				", judgeScore:" + judgeScore + ", sinScore:" + singleScore + ", mulScore" + 
+				mulScore + ", totalTime:" + totalTime;
 	}
 }

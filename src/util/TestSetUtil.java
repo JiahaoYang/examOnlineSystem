@@ -10,6 +10,74 @@ import java.util.ArrayList;
 import entity.TestSet;
 
 public class TestSetUtil {
+	
+	public boolean insertTest(TestSet testSet) {
+		boolean flag = false;
+		String sql = " insert test_set values(?,?,?,?,?,?,?,?,?) ";
+		
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			
+			st.setString(1, testSet.getCourse());
+			st.setInt(2, testSet.getJudgeCnt());
+			st.setInt(3, testSet.getJudgeScore());
+			st.setInt(4, testSet.getSingleCnt());
+			st.setInt(5, testSet.getSingleScore());
+			st.setInt(6, testSet.getMulCnt());
+			st.setInt(7, testSet.getMulScore());
+			st.setInt(8, testSet.getTotalTime());
+			st.setString(9, testSet.getTestTime());
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	
+	public boolean deleteTest(String course) {
+		boolean flag = false;
+		String sql = " delete from test_set where course=? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, course);
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	
+	public boolean updateTest(TestSet testSet) {
+		boolean flag = false;
+		String sql = " update test_set set judge_ques_num=?, judge_ques_score=?, "
+					+ "single_ques_num=?, single_ques_score=?, muti_ques_num=?, muti_ques_score=?,"
+					+ "total_time=?, test_time=? where course=? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setInt(1, testSet.getJudgeCnt());
+			st.setInt(2, testSet.getJudgeScore());
+			st.setInt(3, testSet.getSingleCnt());
+			st.setInt(4, testSet.getSingleScore());
+			st.setInt(5, testSet.getMulCnt());
+			st.setInt(6, testSet.getMulScore());
+			st.setInt(7, testSet.getTotalTime());
+			st.setString(8, testSet.getTestTime());
+			st.setString(9, testSet.getCourse());
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 
 	public ArrayList<String> getCourses() {
 		String sql = " select distinct course from test_set ";

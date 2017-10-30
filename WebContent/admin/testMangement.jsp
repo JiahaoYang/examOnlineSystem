@@ -22,7 +22,7 @@
 			<td colspan="2">单选题</td>
 			<td colspan="2">多选题</td>
 			<td rowspan="2">总分</td>
-			<td rowspan="2">考试时间</td>
+			<td rowspan="2">考试时间(/分钟)</td>
 			<td rowspan="2">考试日期</td>
 			<td rowspan="2">操作</td>
 		</tr>

@@ -61,7 +61,7 @@ function setAnswerType() {
 	}
 }
 
-function isSubmit() {
+function submitQuestion() {
 	var choices = document.getElementsByName("course");
 	var course = "";
 	if (choices[0].checked == true)

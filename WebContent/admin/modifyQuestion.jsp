@@ -153,7 +153,7 @@
 	</tr>
 	<tr>
 		<td>
-		 <input type="button" value="修改" onclick="isSubmit()" />
+		 <input type="button" value="修改" onclick="submitQuestion()" />
 		 <input type="hidden" value="<%=question.getId()%>" name="hiddenQuesId" />
 		</td>
 	</tr>

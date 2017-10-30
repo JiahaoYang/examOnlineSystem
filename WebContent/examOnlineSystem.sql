@@ -72,7 +72,9 @@ insert `test_set` values(
 insert `test_set` values(
 	'英语', 1,1, 2,2, 2,3, 3, '2017/10/26'  
 );
-
+insert `test_set` values(
+	'英语', 1,1, 2,2, 2,3, 3, '2017/09/12'  
+);
 
 insert `question` values(
 	1,  1,  '数学',  '1+1=2?',  '正确', '错误', '', '', 'yes'
@@ -122,6 +124,11 @@ update user_flag set flag=0 where course='语文' and user_id='15090128';
 select * from test_record;
 alter table question modify ques_id int auto_increment;
 alter table question modify answer varchar(10);
+select * from test_set;
+ update test_set set judge_ques_num=1, judge_ques_score=1, 
+ single_ques_num=1, single_ques_score=1, muti_ques_num=1, muti_ques_score=1,
+ total_time=1, test_time='2017-10-31' where course='语文';
+
 select * from question;
 insert `question`(ques_type, ques_course, ques_content, opt_a, opt_b, opt_c, opt_d, answer) values(
 	 3, '语文', '修辞手法有哪些', '比喻', '飞流直下三千尺', '拟人', '排比', 'A C D'

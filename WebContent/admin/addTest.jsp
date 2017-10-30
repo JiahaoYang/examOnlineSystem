@@ -5,38 +5,25 @@
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + 
 						request.getServerPort() + path + "/";
-	String c = request.getParameter("course").trim();
-	String testTime = request.getParameter("testTime").trim();
-
 	TestSetUtil tsUtil = new TestSetUtil();
 	ArrayList<String> courses = tsUtil.getCourses();
-	TestSet test = tsUtil.getTestSet(c, testTime);
 %>
 <!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>考试修改</title>
+<title>考试信息添加</title>
 <script src="<%=path%>/js/testSet.js"></script>
-<script>
-	function setCourse() {
-		var subject = document.getElementsByName("selectCourse")[0];
-		var course = "<%=test.getCourse()%>";
-		for (var i = 0; i < subject.options.length; ++i) 
-			if (subject.options[i].value == course)
-				subject.options[i].selected = true;
-		subject.disabled = true;
-	}
-</script>
+<script src="<%=path%>/js/questionSet.js"></script>
 </head>
-<body onload="setCourse()">
-<h1>考试信息修改</h1>
-<form action="<%=path%>/UpdateTestServlet" method="post">
+<body onload="judgeCourse()">
+<h1>添加考试信息</h1>
+<form action="<%=path%>/AddTestServlet" method="post">
 <table>
 	<tr>
 		<td>科目:</td>
 		<td>
-		 <input type="radio" name="course" value="1" checked="checked"/>
+		 <input type="radio" name="course" value="1" checked="checked" onchange="judgeCourse()"/>
 		 <select name="selectCourse">
 		  <option value="0">请选择</option>
 		  <%
@@ -45,6 +32,8 @@
 		  <option value="<%=course%>"><%=course%></option>
 		  <%}%>
 		 </select>
+		 <input type="radio" name="course" value="2" onchange="judgeCourse()"/>新建
+		 <input type="text" name="createCourse">
 		</td>
 	</tr>
 	<tr id="judgeNum">
@@ -76,11 +65,9 @@
 		<td colspan="2">考试日期:</td>
 		<td><input type="date" name="testTime"></td>
 	</tr>
-	
 	<tr>
 		<td>
-		 <input type="button" value="修改" onclick="submitTest()" />
-		 <input type="hidden" value="<%=c%>" name="hiddenCourse" />
+		 <input type="button" value="提交" onclick="submitTest()" />
 		</td>
 	</tr>
 </table>

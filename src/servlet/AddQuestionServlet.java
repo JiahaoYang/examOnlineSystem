@@ -38,6 +38,7 @@ public class AddQuestionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("utf-8");
 		String courseType = request.getParameter("course");
 		String strCourse = "";
 		if ("1".equals(courseType))
