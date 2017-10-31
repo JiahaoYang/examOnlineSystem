@@ -4,11 +4,47 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 
 import entity.User;
 
 public class UserUtil {
-	//验证用户名，密码，用户类型
+	public boolean addUser(User user) {
+		boolean flag = false;
+		String sql = " insert user values(?,?,?,?) ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, user.getId());
+			st.setString(2, user.getName());
+			st.setString(3, user.getPassword());
+			st.setInt(4, user.getType());
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	
+	public boolean deleteUser(String userId) {
+		boolean flag = false;
+		String sql = " delete from user where user_id=? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, userId);
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
+	
 	public boolean checkUser(String userId, String password, int type) {
 		boolean falg = false;
 		String sql = " select * from user where user_id=? "
@@ -79,5 +115,28 @@ public class UserUtil {
 			e1.printStackTrace();
 		}
 		return user;
+	}
+	
+	public ArrayList<User> getAllUsers() {
+		String sql = " select user_id, user_name, user_type from user ";
+		ArrayList<User> users = new ArrayList<>();
+		User user = null;
+		
+		try (Connection conn = DBUtil.getConnection();
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(sql)) { 
+			
+			while (rs.next()) {
+				user = new User();
+				user.setId(rs.getString("user_id"));
+				user.setName(rs.getString("user_name"));
+				user.setType(rs.getInt("user_type"));
+				
+				users.add(user);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
 	}
 }

@@ -31,4 +31,15 @@ public class CommUtil {
 		String s = str.substring(0, index);
 		return s + "...";
 	}
+	
+	public static String getUserType(int type) {
+		if (type == 1)
+			return "管理员";
+		else if (type == 2)
+			return "教师";
+		else if (type == 3)
+			return "学生";
+		else
+			return "";
+	}
 }

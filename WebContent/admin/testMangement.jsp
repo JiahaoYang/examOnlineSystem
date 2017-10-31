@@ -13,6 +13,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>在线考试系统-考试管理</title>
+<script>
+	function confirmDelete(course, testTime) {
+		var okey = confirm("确认删除此用户?");
+		if (okey)
+			window.location.href = "<%=path%>/admin/deleteTest.jsp?" + 
+				"course=" + course + "&testTime=" + testTime;	
+	}
+</script>
 </head>
 <body>
 	<table>
@@ -52,14 +60,17 @@
 			<td><%=test.getTestTime()%></td>
 			<td><a href="<%=path%>/admin/modifyTest.jsp?
 			course=<%=test.getCourse()%>&testTime=<%=test.getTestTime()%>">修改</a></td>
-			<td><a href="<%=path%>/admin/deleteTest.jsp?
-			course=<%=test.getCourse()%>&testTime=<%=test.getTestTime()%>">删除</a></td>
+			<td><input type="button" name="deleteTest" 
+			onclick="confirmDelete('<%=test.getCourse()%>', '<%=test.getTestTime()%>')" value="删除"></td>
 		</tr>
 	<%
 		}
 	%>
 		<tr>
 			<td><a href="<%=path%>/admin/addTest.jsp">添加考试</a></td>
+		</tr>
+		<tr>
+			<td><a href="<%=path%>/admin/main.jsp">返回</a></td>
 		</tr>
 	</table>
 </body>

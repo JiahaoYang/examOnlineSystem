@@ -13,6 +13,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>在线考试系统-试题管理</title>
+<script>
+	function confirmDelete(quesId) {
+		var okey = confirm("确认删除此问题?");
+		if (okey)
+			window.location.href = "<%=path%>/admin/deleteQuestion.jsp?quesId=" + quesId;
+			
+	}
+</script>
 </head>
 <body>
 	<table>
@@ -49,13 +57,17 @@
 			<td title="<%=question.getAnswer()%>"><%=question.getAnswer()==null ? "" :
 				CommUtil.getSubString(question.getAnswer(), 10) %></td>
 			<td><a href="<%=path%>/admin/modifyQuestion.jsp?quesId=<%=question.getId()%>">修改</a></td>
-			<td><a href="<%=path%>/admin/deleteQuestion.jsp?quesId=<%=question.getId()%>">删除</a></td>
+			<td><input type="button" name="deleteQues" 
+			onclick="confirmDelete('<%=question.getId()%>')" value="删除"></td>
 		</tr>
 	<%
 		}
 	%>
 		<tr>
 			<td><a href="<%=path%>/admin/addQuestion.jsp">添加试题</a></td>
+		</tr>
+		<tr>
+			<td><a href="<%=path%>/admin/main.jsp">返回</a></td>
 		</tr>
 	</table>
 </body>
