@@ -50,4 +50,24 @@ public class UserFlagUtil {
 		}
 		return flag;
 	}
+	
+	public boolean arrangeExam(String stuId, String course, String testTime) {
+		boolean flag = false;
+		String sql = " insert user_flag values(?,?,?,?) ";
+		
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement st = conn.prepareStatement(sql)) {
+			st.setString(1, stuId);
+			st.setString(2, course);
+			st.setInt(3, 0);
+			st.setString(4, testTime);
+			
+			int cnt = st.executeUpdate();
+			if (cnt != 0)
+				flag = true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return flag;
+	}
 }

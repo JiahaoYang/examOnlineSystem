@@ -10,6 +10,28 @@ import java.util.ArrayList;
 import entity.User;
 
 public class UserUtil {
+	public ArrayList<User> getStudents() {
+		String sql = " select user_id, user_name from user where user_type=3 order by user_id ";
+		ArrayList<User> students = new ArrayList<>();
+		User student = null;
+		
+		try (Connection conn = DBUtil.getConnection();
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(sql)) { 
+			
+			while (rs.next()) {
+				student = new User();
+				student.setId(rs.getString("user_id"));
+				student.setName(rs.getString("user_name"));
+				student.setType(3);
+				
+				students.add(student);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return students;	
+	}
 	
 	public ArrayList<User> getAdmins() {
 		String sql = " select user_id, user_name, user_type from user where user_type=1 order by user_id ";
@@ -33,6 +55,7 @@ public class UserUtil {
 		}
 		return admins;
 	}
+	
 	public boolean addUser(User user) {
 		boolean flag = false;
 		String sql = " insert user values(?,?,?,?) ";

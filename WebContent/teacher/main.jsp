@@ -23,6 +23,9 @@
 		<tr>
 			<td> <a href="scoreQuery.jsp?course=<%=course%>" target="_blank">分数查询</a></td>
 		</tr>
+		<tr>
+			<td> <a href="arrangeExam.jsp?course=<%=course%>" target="_blank">安排考试</a></td>
+		</tr>
 	</table>
 	</div>
 	

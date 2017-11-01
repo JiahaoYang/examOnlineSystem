@@ -53,7 +53,7 @@ public class LoginServlet extends HttpServlet {
 		String password = request.getParameter("password").trim();
 		String testTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		String course = new String(request.getParameter("course").getBytes("iso8859-1"), "utf-8").trim();
-		System.out.println(testTime);
+//		System.out.println(testTime);
 		
 		UserUtil userUtil = new UserUtil();
 		UserFlagUtil ufUtil = new UserFlagUtil();
@@ -65,7 +65,6 @@ public class LoginServlet extends HttpServlet {
 		//用户名，类型，密码验证成功
 		if (success) {
 			int flag = ufUtil.isSubmit(userId, course, testTime);
-			System.out.println(flag);
 			//今日有相关考试信息
 			if (tsUtil.getTestSet(course, testTime) != null) {
 				//未考试
