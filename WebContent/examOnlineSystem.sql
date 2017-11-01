@@ -12,7 +12,7 @@ CREATE TABLE `user` (
 
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
-	`ques_id` INT PRIMARY KEY,
+	`ques_id` INT PRIMARY KEY AUTO_INCREMENT,
 	`ques_type` INT,
 	`ques_course` VARCHAR(50) NOT NUll,
 	`ques_content` TEXT, 
@@ -20,7 +20,7 @@ CREATE TABLE `question` (
 	`opt_b` TEXT,
 	`opt_c` TEXT,
 	`opt_d` TEXT,
-	`answer` CHAR(5)
+	`answer` VARCHAR(10)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `test_set`;
@@ -44,46 +44,70 @@ CREATE TABLE `user_flag` (
 	`test_time` VARCHAR(50)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+DROP TABLE IF EXISTS `test_record`;
+CREATE TABLE `test_record` (
+	`user_id` varchar(20),
+    `course` VARCHAR(50),
+	`ques_id` INT,
+	`ques_num` INT,
+	`ques_type` INT,
+	`answer` TEXT,
+    `score` INT,
+	`test_time` TEXT
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `paper`;
+CREATE TABLE `paper` (
+	`paper_id` INT PRIMARY KEY auto_increment,
+	`user_id` varchar(30) NOT NUll,
+	`paper_course` VARCHAR(50) NOT NUll,
+	`score` INT
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 insert `user` values(
-	'15090128', 'yjh', '123456', 3
+	'15090128', 'JiahaoYang', '123456', 3
 );
 insert `user` values(
-	'admin', 'admin', 'admin', 1
+	'15090146', 'ShihuiQian', '123456', 2
 );
 insert `user` values(
-	't1' , '钱诗慧', 't1', 2
+	'15090127' , 'JianJianLi', '123456', 1
 );
+insert `user` values(
+	'15090130' , 'JibaYao', '123456', 1
+);
+
 
 insert `user_flag` values(
-	'15090128', '数学', '0', '2017/10/24'
+	'15090127', '数学', '0', '2017-11-02'
 );
 insert `user_flag` values(
-	'15090128', '语文', '0', '2017/10/25'
+	'15090130', '数学', '0', '2017-11-02'
 );
-
 insert user_flag values(
-	'15090127' ,'语文', '0', '2017-11-01'
+	'15090127' ,'语文', '0', '2017-11-02'
 );
+insert user_flag values(
+	'15090130' ,'语文', '0', '2017-11-02'
+)
 
 
 insert `test_set` values(
-	'数学', 1,1, 2,2, 3,3, 3, '2017/10/24'  
+	'数学', 1,1, 2,2, 3,3, 1, '2017-11-02'  
 );
 insert `test_set` values(
-	'语文', 1,1, 2,2, 2,3, 3, '2017/10/25'  
+	'语文', 1,1, 0,2, 2,3, 1, '2017-11-02'  
 );
 insert `test_set` values(
-	'英语', 1,1, 2,2, 2,3, 3, '2017/10/26'  
+	'英语', 1,1, 2,2, 2,3, 1, '2017-11-03'  
 );
-insert `test_set` values(
-	'英语', 1,1, 2,2, 2,3, 3, '2017/09/12'  
-);
+
+
 
 insert `question` values(
 	1,  1,  '数学',  '1+1=2?',  '正确', '错误', '', '', 'yes'
 );
-
 insert `question` values(
 	2, 2, '数学', '1+1=?', '1','2','3','4' ,'B'
 );
@@ -99,7 +123,6 @@ insert `question` values(
 insert `question` values(
 	6, 3, '数学', '?+?=6', '1+5','2+1','1+2','3+3', 'A D'
 );
-
 insert `question` values(
 	7, 1, '语文', '杜甫是元朝人', '正确', '错误', '', '', 'no'
 );
@@ -123,50 +146,15 @@ insert `question` values(
     '大量创作慢词', '变雅为俗,用通俗化语言表现市民生活', '成功地运用了铺叙和白描的手法', '词的审美趣味向通俗化和自我化方向转变', 
     'A B'
 );
-
-update user_flag set flag=0 where course='语文' and user_id='15090128';
-select * from test_record;
-alter table question modify ques_id int auto_increment;
-alter table question modify answer varchar(10);
-select * from test_set;
- update test_set set judge_ques_num=1, judge_ques_score=1, 
- single_ques_num=1, single_ques_score=1, muti_ques_num=1, muti_ques_score=1,
- total_time=1, test_time='2017-10-31' where course='语文';
-
-select * from question;
 insert `question`(ques_type, ques_course, ques_content, opt_a, opt_b, opt_c, opt_d, answer) values(
 	 3, '语文', '修辞手法有哪些', '比喻', '飞流直下三千尺', '拟人', '排比', 'A C D'
 );
 
-delete from question where ques_course='语文';
-delete from question where ques_course='数学';
-
-DROP TABLE IF EXISTS `test_record`;
-CREATE TABLE `test_record` (
-	`user_id` varchar(20),
-    `course` VARCHAR(50),
-	`ques_id` INT,
-	`ques_num` INT,
-	`ques_type` INT,
-	`answer` TEXT,
-    `score` INT,
-	`test_time` TEXT
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-select * from test_set;
-select * from user_flag;
 
 
-DROP TABLE IF EXISTS `paper`;
-CREATE TABLE `paper` (
-	`paper_id` INT PRIMARY KEY auto_increment,
-	`user_id` varchar(30) NOT NUll,
-	`paper_course` VARCHAR(50) NOT NUll,
-	`score` INT
-)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-select * from user_flag;
 
-delete from user_flag where course='数学';
+
+
 
 
