@@ -17,11 +17,16 @@
 		function check() {
 			var username = document.forms[0].teacherId.value;
 			var password = document.forms[0].password.value;
+			var course = document.forms[0].course.value;
+			
 			if (username == "") {
 				alert("请输入教师号!");
 			}
 			else if (password == "") {
 				alert("请输入密码!");
+			}
+			else if (course == "0") {
+				alert("请选择课程!");
 			}
 			else {
 				document.forms[0].submit();
@@ -41,7 +46,17 @@
 			<td>密码：</td>
 			<td><input type="password" name="password" id="password" /></td>
 		</tr>
-
+		<tr>
+			<td>科目：</td>
+			<td><select name="course" id="course">
+				<option value="0">请选择</option>
+				<%
+					for (String course : courses) {
+				%>
+				<option value="<%=course%>"><%=course%></option>
+				<%	} %>
+			</select></td>
+		</tr>
 		<tr>
 			<td><input type="button" value="登陆" onclick="check()"></td>
 		</tr>

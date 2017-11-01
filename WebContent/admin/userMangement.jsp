@@ -7,13 +7,14 @@
 						request.getServerPort() + path + "/";
 	UserUtil userUtil = new UserUtil();
 	ArrayList<User> users = userUtil.getAllUsers();
-	
+	ArrayList<User> admins = userUtil.getAdmins();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>在线考试系统-用户管理</title>
+<script src="<%=path%>/js/user.js"></script>
 <script>
 	function confirmDelete(userId) {
 		var okey = confirm("确认删除此用户?");
@@ -29,7 +30,12 @@
 
 			<td>用户名</td>
 			<td>昵称</td>
-			<td>类别</td>
+			<td><select name="selectType" onchange="display()">
+				<option value="0">全部</option>
+				<option value="1">管理员</option>
+				<option value="0">教师</option>
+				<option value="0">学生</option>
+			</select></td>
 		</tr>
 		
 		
@@ -46,6 +52,7 @@
 	<%
 		}
 	%>
+	
 		<tr>
 			<td><a href="<%=path%>/admin/addUser.jsp">添加用户</a></td>
 		</tr>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import entity.Question;
 import entity.TestRecord;
 import entity.TestSet;
+import util.PaperUtil;
 import util.QuestionUtil;
 import util.TestRecordUtil;
 import util.TestSetUtil;
@@ -60,7 +61,7 @@ public class CorrectPaperServlet extends HttpServlet {
 		TestSetUtil tsUtil = new TestSetUtil();
 		TestSet testSet = tsUtil.getTestSet(course, testTime);
 		ArrayList<TestRecord> records = new ArrayList<>();	//考生答题信息（题号，题目id，分数，考生答案）
-		
+		int totalScore = 0;
 		
 		for (int i = 0; i < testSet.getJudgeCnt(); ++i) {
 			TestRecord record = new TestRecord();
@@ -81,6 +82,7 @@ public class CorrectPaperServlet extends HttpServlet {
 			record.setStuAnswer(stuAns);
 			record.setTestTime(testTime);
 			
+			totalScore += score;
 			records.add(record);
 		}
 		
@@ -103,6 +105,7 @@ public class CorrectPaperServlet extends HttpServlet {
 			record.setStuAnswer(stuAns);
 			record.setTestTime(testTime);
 			
+			totalScore += score;
 			records.add(record);
 		}
 		
@@ -131,11 +134,14 @@ public class CorrectPaperServlet extends HttpServlet {
 			record.setStuAnswer(stuAns);
 			record.setTestTime(testTime);
 			
+			totalScore += score;
 			records.add(record);
 		}
-		TestRecordUtil trUtil = new TestRecordUtil();
 		
-		boolean success = trUtil.insertRecord(records);
+		TestRecordUtil trUtil = new TestRecordUtil();
+		PaperUtil paperUtil = new PaperUtil();
+		
+		boolean success = trUtil.insertRecord(records) && paperUtil.createPaper(userId, course, totalScore);
 		if (success) {
 			new UserFlagUtil().setUserFlag(userId, course, testTime);
 			response.sendRedirect(request.getContextPath() + "/student/finish.jsp");

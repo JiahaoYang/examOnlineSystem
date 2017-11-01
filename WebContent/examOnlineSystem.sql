@@ -62,6 +62,10 @@ insert `user_flag` values(
 	'15090128', '语文', '0', '2017/10/25'
 );
 
+insert user_flag values(
+	'15090127' ,'语文', '0', '2017-11-01'
+);
+
 
 insert `test_set` values(
 	'数学', 1,1, 2,2, 3,3, 3, '2017/10/24'  
@@ -149,16 +153,20 @@ CREATE TABLE `test_record` (
 	`test_time` TEXT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+select * from test_set;
+select * from user_flag;
 
-/*试卷：题目数量，题号列表
+
 DROP TABLE IF EXISTS `paper`;
 CREATE TABLE `paper` (
-	`paper_id` INT PRIMARY KEY,
-	`user_id` INT NOT NUll,
+	`paper_id` INT PRIMARY KEY auto_increment,
+	`user_id` varchar(30) NOT NUll,
 	`paper_course` VARCHAR(50) NOT NUll,
-	`judge_ques_list` TEXT,
-	`single_ques_list` TEXT,
-	`muti_ques_list` TEXT,
 	`score` INT
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
-*/
+
+select * from user_flag;
+
+delete from user_flag where course='数学';
+
+

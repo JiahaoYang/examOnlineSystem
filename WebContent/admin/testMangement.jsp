@@ -15,7 +15,7 @@
 <title>在线考试系统-考试管理</title>
 <script>
 	function confirmDelete(course, testTime) {
-		var okey = confirm("确认删除此用户?");
+		var okey = confirm("确认删除本场考试?");
 		if (okey)
 			window.location.href = "<%=path%>/admin/deleteTest.jsp?" + 
 				"course=" + course + "&testTime=" + testTime;	

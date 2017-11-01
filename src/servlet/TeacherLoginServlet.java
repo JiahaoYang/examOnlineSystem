@@ -38,10 +38,11 @@ public class TeacherLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
-		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		
-		String teacherId = request.getParameter("teacherId");
-		String password = request.getParameter("password");
+		String teacherId = request.getParameter("teacherId").trim();
+		String password = request.getParameter("password").trim();
+		String course = request.getParameter("course").trim();
 		
 		UserUtil userUtil = new UserUtil();
 		boolean userSuccess = userUtil.checkUser(teacherId, 2);
@@ -50,7 +51,8 @@ public class TeacherLoginServlet extends HttpServlet {
 		if (success) {
 			HttpSession session = request.getSession(true);
 			session.setAttribute("teacherId", teacherId);
-			response.sendRedirect(request.getContextPath() + "/teacher/main.html");
+			session.setAttribute("course", course);
+			response.sendRedirect(request.getContextPath() + "/teacher/main.jsp");
 		}
 		else if (userSuccess)
 			response.sendRedirect(request.getContextPath() + "/teacher/login.jsp?flag=error");

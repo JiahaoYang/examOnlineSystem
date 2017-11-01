@@ -118,7 +118,7 @@
 	</tr>
 	<tr>
 		<td>
-		 <input type="button" value="提交" onclick="isSubmit()" />
+		 <input type="button" value="提交" onclick="submitQuestion()" />
 		</td>
 	</tr>
 </table>

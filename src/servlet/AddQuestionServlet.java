@@ -39,17 +39,16 @@ public class AddQuestionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
 		request.setCharacterEncoding("utf-8");
+		
 		String courseType = request.getParameter("course");
 		String strCourse = "";
 		if ("1".equals(courseType))
 			strCourse = "selectCourse";
 		else
 			strCourse = "createCourse";
-		String course = new String(
-				request.getParameter(strCourse).getBytes("iso8859-1"), "utf-8").trim();
+		String course = request.getParameter(strCourse).trim();
 		int type = Integer.parseInt(request.getParameter("selectType").trim());
-		String ques = new String(
-				request.getParameter("ques").getBytes("iso8859-1"), "utf-8").trim();
+		String ques = request.getParameter("ques").trim();
 		String keyA = null;
 		String keyB = null;
 		String keyC = null;

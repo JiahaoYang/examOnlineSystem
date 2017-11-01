@@ -30,11 +30,13 @@ public class TestRecordUtil {
 			}
 			int[] state = st.executeBatch();
 			conn.commit();
-			if (state != null)
+			if (state != null) {
 				flag = true;
+			}
 		}  catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return flag;
 	}
+	
 }
