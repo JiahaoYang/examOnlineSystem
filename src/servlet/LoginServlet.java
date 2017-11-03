@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import util.MD5Util;
 import util.TestSetUtil;
 import util.UserFlagUtil;
 import util.UserUtil;
@@ -50,7 +50,7 @@ public class LoginServlet extends HttpServlet {
 		response.setCharacterEncoding("utf8");
 
 		String userId = request.getParameter("userId").trim();
-		String password = request.getParameter("password").trim();
+		String password = MD5Util.encodeByMD5(request.getParameter("password").trim());
 		String testTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
 		String course = new String(request.getParameter("course").getBytes("iso8859-1"), "utf-8").trim();
 //		System.out.println(testTime);

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entity.User;
+import util.MD5Util;
 import util.UserUtil;
 
 /**
@@ -42,7 +43,7 @@ public class AddUserServlet extends HttpServlet {
 		
 		String userId = request.getParameter("userId").trim();
 		String userName = request.getParameter("userName").trim();
-		String password = request.getParameter("password").trim();
+		String password = MD5Util.encodeByMD5(request.getParameter("password").trim());
 		int userType = Integer.parseInt(request.getParameter("selectType").trim());
 		
 		User user = new User();

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.MD5Util;
 import util.UserUtil;
 
 /**
@@ -41,7 +42,7 @@ public class TeacherLoginServlet extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		
 		String teacherId = request.getParameter("teacherId").trim();
-		String password = request.getParameter("password").trim();
+		String password = MD5Util.encodeByMD5(request.getParameter("password").trim());
 		String course = request.getParameter("course").trim();
 		
 		UserUtil userUtil = new UserUtil();

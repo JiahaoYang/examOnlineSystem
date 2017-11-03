@@ -10,6 +10,29 @@ import java.util.ArrayList;
 import entity.User;
 
 public class UserUtil {
+	public ArrayList<User> getTeachers() {
+		String sql = " select user_id, user_name from user where user_type=2 order by user_id ";
+		ArrayList<User> teachers = new ArrayList<>();
+		User teacher = null;
+		
+		try (Connection conn = DBUtil.getConnection();
+				Statement st = conn.createStatement();
+				ResultSet rs = st.executeQuery(sql)) { 
+			
+			while (rs.next()) {
+				teacher = new User();
+				teacher.setId(rs.getString("user_id"));
+				teacher.setName(rs.getString("user_name"));
+				teacher.setType(2);
+				
+				teachers.add(teacher);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return teachers;	
+	}
+	
 	public ArrayList<User> getStudents() {
 		String sql = " select user_id, user_name from user where user_type=3 order by user_id ";
 		ArrayList<User> students = new ArrayList<>();

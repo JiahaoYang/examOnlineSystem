@@ -66,17 +66,18 @@ CREATE TABLE `paper` (
 
 
 insert `user` values(
-	'15090128', 'JiahaoYang', '123456', 3
+	'15090128', 'JiahaoYang', 'e10adc3949ba59abbe56e057f20f883e', 1
 );
 insert `user` values(
-	'15090146', 'ShihuiQian', '123456', 2
+	'15090146', 'ShihuiQian', 'e10adc3949ba59abbe56e057f20f883e', 2
 );
 insert `user` values(
-	'15090127' , 'JianJianLi', '123456', 1
+	'15090127' , 'JianJianLi', 'e10adc3949ba59abbe56e057f20f883e', 3
 );
-insert `user` values(
-	'15090130' , 'JibaYao', '123456', 1
+insert `user` values(binary
+	'15090130' , 'JibaYao', 'e10adc3949ba59abbe56e057f20f883e', 3
 );
+
 
 
 insert `user_flag` values(
@@ -90,7 +91,7 @@ insert user_flag values(
 );
 insert user_flag values(
 	'15090130' ,'语文', '0', '2017-11-02'
-)
+);
 
 
 insert `test_set` values(

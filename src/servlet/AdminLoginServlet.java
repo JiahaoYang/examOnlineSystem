@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import util.MD5Util;
 import util.UserUtil;
 
 /**
@@ -41,7 +42,7 @@ public class AdminLoginServlet extends HttpServlet {
 		response.setCharacterEncoding("utf-8");
 		
 		String adminId = request.getParameter("adminId");
-		String password = request.getParameter("password");
+		String password = MD5Util.encodeByMD5(request.getParameter("password"));
 		
 		UserUtil userUtil = new UserUtil();
 		boolean success = userUtil.checkUser(adminId, password, 1);
