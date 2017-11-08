@@ -62,25 +62,17 @@ public class AddQuestionServlet extends HttpServlet {
 			answer = request.getParameter("judgeAns").trim();
 		}
 		else if (type == 2) {
-			keyA = new String(
-					request.getParameter("KeyA").getBytes("iso8859-1"), "utf-8").trim();
-			keyB = new String(
-					request.getParameter("KeyB").getBytes("iso8859-1"), "utf-8").trim();
-			keyC= new String(
-					request.getParameter("KeyC").getBytes("iso8859-1"), "utf-8").trim();
-			keyD = new String(
-					request.getParameter("KeyD").getBytes("iso8859-1"), "utf-8").trim();
+			keyA = request.getParameter("KeyA").trim();
+			keyB = request.getParameter("KeyB").trim();
+			keyC= request.getParameter("KeyC").trim();
+			keyD = request.getParameter("KeyD").trim();
 			answer = request.getParameter("sinAns").trim();
 		}
 		else {
-			keyA = new String(
-					request.getParameter("KeyA").getBytes("iso8859-1"), "utf-8").trim();
-			keyB = new String(
-					request.getParameter("KeyB").getBytes("iso8859-1"), "utf-8").trim();
-			keyC= new String(
-					request.getParameter("KeyC").getBytes("iso8859-1"), "utf-8").trim();
-			keyD = new String(
-					request.getParameter("KeyD").getBytes("iso8859-1"), "utf-8").trim();
+			keyA = request.getParameter("KeyA").trim();
+			keyB = request.getParameter("KeyB").trim();
+			keyC= request.getParameter("KeyC").trim();
+			keyD = request.getParameter("KeyD").trim();
 			String[] strAns = request.getParameterValues("mulAns");
 			for (String ans : strAns) 
 				answer += (ans + " ");

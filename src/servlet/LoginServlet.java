@@ -47,12 +47,12 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf8");
-		response.setCharacterEncoding("utf8");
+		request.setCharacterEncoding("utf-8");
 
 		String userId = request.getParameter("userId").trim();
 		String password = MD5Util.encodeByMD5(request.getParameter("password").trim());
 		String testTime = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-		String course = new String(request.getParameter("course").getBytes("iso8859-1"), "utf-8").trim();
+		String course = request.getParameter("course").trim();
 //		System.out.println(testTime);
 		
 		UserUtil userUtil = new UserUtil();

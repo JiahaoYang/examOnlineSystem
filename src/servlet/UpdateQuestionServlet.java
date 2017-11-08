@@ -38,6 +38,8 @@ public class UpdateQuestionServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html; charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
 		int quesId = Integer.parseInt(request.getParameter("hiddenQuesId").trim());
 		String courseType = request.getParameter("course");
 		String strCourse = "";
@@ -45,11 +47,10 @@ public class UpdateQuestionServlet extends HttpServlet {
 			strCourse = "selectCourse";
 		else
 			strCourse = "createCourse";
-		String course = new String(
-				request.getParameter(strCourse).getBytes("iso8859-1"), "utf-8").trim();
+		String course = request.getParameter(strCourse).trim();
 		int type = Integer.parseInt(request.getParameter("selectType").trim());
-		String ques = new String(
-				request.getParameter("ques").getBytes("iso8859-1"), "utf-8").trim();
+		String ques = request.getParameter("ques").trim();
+		
 		String keyA = null;
 		String keyB = null;
 		String keyC = null;
@@ -63,30 +64,23 @@ public class UpdateQuestionServlet extends HttpServlet {
 			answer = request.getParameter("judgeAns").trim();
 		}
 		else if (type == 2) {
-			keyA = new String(
-					request.getParameter("KeyA").getBytes("iso8859-1"), "utf-8").trim();
-			keyB = new String(
-					request.getParameter("KeyB").getBytes("iso8859-1"), "utf-8").trim();
-			keyC= new String(
-					request.getParameter("KeyC").getBytes("iso8859-1"), "utf-8").trim();
-			keyD = new String(
-					request.getParameter("KeyD").getBytes("iso8859-1"), "utf-8").trim();
+			keyA = request.getParameter("KeyA").trim();
+			keyB = request.getParameter("KeyB").trim();
+			keyC= request.getParameter("KeyC").trim();
+			keyD = request.getParameter("KeyD").trim();
 			answer = request.getParameter("sinAns").trim();
 		}
 		else {
-			keyA = new String(
-					request.getParameter("KeyA").getBytes("iso8859-1"), "utf-8").trim();
-			keyB = new String(
-					request.getParameter("KeyB").getBytes("iso8859-1"), "utf-8").trim();
-			keyC= new String(
-					request.getParameter("KeyC").getBytes("iso8859-1"), "utf-8").trim();
-			keyD = new String(
-					request.getParameter("KeyD").getBytes("iso8859-1"), "utf-8").trim();
+			keyA = request.getParameter("KeyA").trim();
+			keyB = request.getParameter("KeyB").trim();
+			keyC= request.getParameter("KeyC").trim();
+			keyD = request.getParameter("KeyD").trim();
 			String[] strAns = request.getParameterValues("mulAns");
 			for (String ans : strAns) 
 				answer += (ans + " ");
 			answer = answer.substring(0, answer.length()-1);
 		}
+		
 		question.setId(quesId);
 		question.setCourse(course);
 		question.setType(type);

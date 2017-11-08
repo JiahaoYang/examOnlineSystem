@@ -19,6 +19,7 @@ initParams = {@WebInitParam(name = "notFilter", value = "/admin/login.jsp;/admin
 public class AdminLoginFilter implements Filter {
 	private FilterConfig config;
 
+	//在用户未登录前过滤禁止访问的页面
 	@Override
 	public void doFilter(ServletRequest arg0, ServletResponse arg1, FilterChain chain)
 			throws IOException, ServletException {

@@ -151,7 +151,7 @@ insert `question`(ques_type, ques_course, ques_content, opt_a, opt_b, opt_c, opt
 	 3, '语文', '修辞手法有哪些', '比喻', '飞流直下三千尺', '拟人', '排比', 'A C D'
 );
 
-
+select * FROM question;
 
 
 

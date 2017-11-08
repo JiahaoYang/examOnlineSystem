@@ -41,12 +41,16 @@ public class CorrectPaperServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
-
+	
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * 根据学生的答案自动改卷
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
+		request.setCharacterEncoding("utf-8");
+		
 		HttpSession session = request.getSession(true);
 		String userId = (String)session.getAttribute("userId");
 		String course = (String)session.getAttribute("course");
